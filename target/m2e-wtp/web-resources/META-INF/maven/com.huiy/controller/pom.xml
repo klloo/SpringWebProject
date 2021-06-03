@@ -80,7 +80,7 @@
 					<artifactId>jmxri</artifactId>
 				</exclusion>
 			</exclusions>
-			<scope>runtime</scope>
+			<!--  <scope>runtime</scope> -->
 		</dependency>
 
 		<!-- @Inject -->
@@ -117,6 +117,12 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>      
+		
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.5</version>
+		</dependency>
 		
 		
 		<!-- lombok -->
@@ -189,6 +195,20 @@
 	
 		
 		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.6</version>
+		</dependency>
+  		<!--  Gson: Java to Json conversion -->
+    	<dependency>
+      		<groupId>com.google.code.gson</groupId>
+      		<artifactId>gson</artifactId>
+      		<version>2.6.2</version>
+      		<scope>compile</scope>
+    	</dependency>
+
+
 	</dependencies>
     <build>
         <plugins>
