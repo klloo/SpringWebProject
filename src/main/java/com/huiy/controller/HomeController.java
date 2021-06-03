@@ -41,13 +41,6 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		
-		model.addAttribute("serverTime", formattedDate );
-		try(Connection con = dataSource.getConnection()){
-			System.out.println("성공");
-		} catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
 		return "home";
 	}
 	
