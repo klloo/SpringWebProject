@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.huiy.domain.BoardVO;
+import com.huiy.domain.Criteria;
+import com.huiy.domain.PageDTO;
 import com.huiy.service.BoardService;
 
 import lombok.Setter;
@@ -22,28 +24,30 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@GetMapping("/list")
-	public String list(Model model) {
-		List<BoardVO> boardList = boardService.getList();
-		model.addAttribute("list",boardList);
-		return "board-list";
+	public String list(Criteria cri, Model model) {
+		List<BoardVO> boardList = boardService.getList(cri);
+		int total = boardService.getAllList().size();
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("pageMaker",new PageDTO(cri, total));
+		return "board/list";
 	}
 	
 	@GetMapping("/read")
 	public String read(@RequestParam("bno") Long bno, Model model) {
 		BoardVO board = boardService.get(bno);
 		model.addAttribute("board",board);
-		return "board-read";
+		return "board/read";
 	}
 	
 	@GetMapping("/register")
 	public String register() {
-		return "board-save";
+		return "board/save";
 	}
 	
 	@GetMapping("/update")
 	public String modify(@RequestParam("bno") Long bno, Model model) {
 		BoardVO board = boardService.get(bno);
 		model.addAttribute("board",board);
-		return "board-update";
+		return "board/update";
 	}
 }

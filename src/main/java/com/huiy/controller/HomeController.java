@@ -41,7 +41,7 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		
-		return "home";
+		return "redirect:/board/list";
 	}
 	
 }

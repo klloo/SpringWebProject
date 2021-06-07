@@ -1,5 +1,7 @@
 package com.huiy.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.huiy.domain.BoardVO;
+import com.huiy.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -53,7 +56,6 @@ public class BoardMapperTests {
 		BoardVO board = new BoardVO();
 		board.setTitle("바뀐 제목1");
 		board.setContent("바뀐 내용1");
-		board.setWriter("changeduser1");
 		board.setBno(46L);
 		mapper.update(board);
 		log.info("update : " + mapper.read(46L));
@@ -62,5 +64,16 @@ public class BoardMapperTests {
 	@Test
 	public void testDelete() {
 		log.info("delete : " + mapper.delete(50L));
+	}
+	
+	@Test
+	public void testPaging() {
+		Criteria cri = new Criteria();
+		cri.setPageNum(3);
+		cri.setAmount(10);
+		
+		List<BoardVO> list = mapper.getListWithPaging(cri);
+		log.info("paging : ");
+		list.forEach(board->log.info(board.getBno()));
 	}
 }

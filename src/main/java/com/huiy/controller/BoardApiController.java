@@ -34,13 +34,13 @@ public class BoardApiController {
 	}
 	
 	@PutMapping("/board")
-	public boolean modify(@RequestBody BoardVO board) {
-		return boardService.modify(board);
+	public void modify(@RequestBody BoardVO board) {
+		boardService.modify(board);
 	}
 	
 	@DeleteMapping("/board/{bno}")
-	public boolean remove(@PathVariable Long bno) {
-		return boardService.remove(bno);
+	public void remove(@PathVariable Long bno) {
+		boardService.remove(bno);
 	}
 
 }
