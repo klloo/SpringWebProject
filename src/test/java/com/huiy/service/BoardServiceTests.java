@@ -34,6 +34,7 @@ public class BoardServiceTests {
 		board.setTitle("새로운 제목");
 		board.setContent("새로운 내용");
 		board.setWriter("newuser");
+		board.setUserid("user3");
 		service.register(board);
 		log.info("register : " + board.getBno());
 	}

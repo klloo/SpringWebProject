@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file = "../includes/header.jsp" %>
 <%@include file = "../includes/top_menu.jsp" %>
-<%@include file = "../includes/page_header.jsp" %>
-
 
 <style>
         *{
@@ -52,20 +50,50 @@
      </style>
  
 
-
+<!-- Page Header-->
+        <header class="masthead" style="background-image: url('/resources/images/cafe_image.jpeg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>MY PAGE</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
 <div class="table_div">
-
-	<sec:authorize access="isAuthenticated()"> 
-	    <div class="write_btn" style="float:right">
-	        <div>
-	            <a href="/board/register" >WRITE</a>
-	        </div>
-	    </div>
-    </sec:authorize>
+	
+   
     
-    <br><br><br>
-
+    <div class="write_btn" style="float:right">
+		<div>
+			<a href="/member/update" >EDIT</a>
+		</div>
+	</div>
+	<h5>INFO</h5>
+ 	<table class="table">
+        <thead class="thead">
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>REGISTRATION DATE</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        	<tr>
+				<td> <sec:authentication property="principal.member.userid"/> </td>
+				<td> <sec:authentication property="principal.member.userName"/></td>
+				<sec:authentication property="principal.member.regDate" var="regdate"/>
+				<td> <fmt:formatDate pattern="yyyy. MM. dd" value="${regdate}"/></td>
+			</tr>
+        </tbody>
+    </table>
+    <br><br>
     <!-- 목록 출력 영역 -->
+    <div style="margin-bottom:20px;">
+    <h5>${total}개의 글</h5>
+    </div>
     <table class="table">
         <thead class="thead">
         <tr>
@@ -118,7 +146,7 @@
 		    </c:if>
     	</ul>
     </div>
-    <form id='actionForm' action="/board/list" method='get'>
+    <form id='actionForm' action="/member/mypage" method='get'>
     	<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
     	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
     </form>

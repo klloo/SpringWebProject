@@ -3,6 +3,7 @@ package com.huiy.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,12 +39,12 @@ public class BoardController {
 		model.addAttribute("board",board);
 		return "board/read";
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_USER,ROLE_ADMIN')")
 	@GetMapping("/register")
 	public String register() {
 		return "board/save";
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_USER,ROLE_ADMIN')")
 	@GetMapping("/update")
 	public String modify(@RequestParam("bno") Long bno, Model model) {
 		BoardVO board = boardService.get(bno);

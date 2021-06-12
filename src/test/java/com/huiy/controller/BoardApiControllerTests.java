@@ -29,6 +29,7 @@ import lombok.extern.log4j.Log4j;
 @WebAppConfiguration
 @ContextConfiguration({
 	"file:src/main/webapp/WEB-INF/spring/root-context.xml",
+	"file:src/main/webapp/WEB-INF/spring/security-context.xml",
 	"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
 })
 @Log4j
@@ -62,8 +63,9 @@ public class BoardApiControllerTests {
 		board.setTitle("apitest");
 		board.setContent("apitest content");
 		board.setWriter("writer");
+		board.setUserid("user3");
 		Gson gson = new Gson();
-		this.mockMvc.perform(post("/api/board/")
+		this.mockMvc.perform(post("/api/board/true")
 				.content(gson.toJson(board))
 				.contentType(MediaType.APPLICATION_JSON))
 		.andDo(print());

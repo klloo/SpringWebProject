@@ -33,6 +33,7 @@ public class BoardMapperTests {
 		board.setTitle("새로운 제목");
 		board.setContent("새로운 내용");
 		board.setWriter("newuser");
+		board.setUserid("user3");
 		mapper.insert(board);
 	}
 	
@@ -42,6 +43,7 @@ public class BoardMapperTests {
 		board.setTitle("새로운 제목1");
 		board.setContent("새로운 내용1");
 		board.setWriter("newuser1");
+		board.setUserid("user3");
 		mapper.insertSelectKey(board);
 		log.info("insertSelectKey : "+board.getBno());
 	}

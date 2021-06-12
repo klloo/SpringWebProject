@@ -1,6 +1,7 @@
 package com.huiy.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,12 +28,14 @@ public class BoardApiController {
 		return boardService.get(bno);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/board")
 	public Long register(@RequestBody BoardVO board) {
 		boardService.register(board);
 		return board.getBno();
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@PutMapping("/board")
 	public void modify(@RequestBody BoardVO board) {
 		boardService.modify(board);

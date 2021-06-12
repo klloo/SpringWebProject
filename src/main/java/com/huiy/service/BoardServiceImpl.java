@@ -48,4 +48,14 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.getListWithPaging(cri);
 	}
 
+	@Override
+	public int getCntWithUser(String userid) {
+		return mapper.getCntWithUser(userid);
+	}
+
+	@Override
+	public List<BoardVO> getListWithUser(String userid, Criteria cri) {
+		return mapper.getListWithUserPaging(userid, cri);
+	}
+
 }

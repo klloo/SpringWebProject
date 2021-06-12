@@ -6,10 +6,10 @@
 <mapper namespace="com.huiy.mapper.BoardMapper">
 	<select id="getListWithPaging" resultType="com.huiy.domain.BoardVO">
  		<![CDATA[
-			select bno,title,content,writer,regdate,updatedate
+			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous
 			from (
 			 select /*+INDEX_DESC(tbl_board pk_board)*/
-			  rownum rn,bno,title,content,writer,regdate,updatedate 
+			  rownum rn,bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous
 			 from tbl_board
 			 where rownum <= #{pageNum} * #{amount}
 			)
@@ -17,9 +17,23 @@
  		]]> 
     </select>
     
+    <select id="getListWithUserPaging" resultType="com.huiy.domain.BoardVO">
+		<![CDATA[
+			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous
+			from (
+			 select /*+INDEX_DESC(tbl_board pk_board)*/
+			  rownum rn,bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous
+			 from tbl_board
+			 where rownum <= #{cri.pageNum} * #{cri.amount}
+			 and userid=#{userid}
+			)
+			where rn > (#{cri.pageNum}-1) * #{cri.amount}
+ 		]]> 
+    </select>
+    
     <insert id="insert">
- 		insert into tbl_board (bno,title,content,writer)
- 		values(SEQ_BOARD.nextval,#{title},#{content},#{writer})
+ 		insert into tbl_board (bno,title,content,writer,userid,isanonymous)
+ 		values(SEQ_BOARD.nextval,#{title},#{content},#{writer},#{userid},#{isanonymous})
     </insert>
     
     
@@ -27,8 +41,8 @@
     	<selectKey keyProperty="bno" order="BEFORE" resultType="long">
     		select seq_board.nextval from dual
     	</selectKey>
-   		insert into tbl_board (bno,title,content,writer)
- 		values(SEQ_BOARD.nextval,#{title},#{content},#{writer})
+   		insert into tbl_board (bno,title,content,writer,userid,isanonymous)
+ 		values(SEQ_BOARD.nextval,#{title},#{content},#{writer},#{userid},#{isanonymous})
     </insert>
     	
     <select id="read" resultType="com.huiy.domain.BoardVO">
@@ -40,6 +54,7 @@
     	set
     	title = #{title},
     	content = #{content},
+    	isanonymous = #{isanonymous},
     	updatedate = sysdate
     	where bno = #{bno}
     </update>

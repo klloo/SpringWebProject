@@ -2,6 +2,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file = "../includes/header.jsp" %>
+<%@include file = "../includes/top_menu.jsp" %>
+<%@include file = "../includes/page_header.jsp" %>
 
 <style>
         *{
@@ -39,8 +41,11 @@
             display: flex;
         }
         .date{
-            padding-left: 1%;
             color: rgb(153, 153, 153);
+            font-size: 90%;
+        }
+        .writer {
+        	font-size: 90%;
         }
         .post_form{
             padding-left: 15%;
@@ -55,32 +60,40 @@
         }
         .id_info{ display: none;}
      </style>
-<a href="/" style="text-decoration: none;">
-    <h1 class="blog_title">HUI YEONG'S BOARD </h1>
-</a>
+<br/><br/><br/>
 <input type="text" class="id_info" id="id" value="${board.bno}" readonly>
+<div class="container">
 <div class="post_form">
     <h2 class="title"> <c:out value="${board.title}"></c:out></h2>
     <div class="under">
         <div class="write_info">
             <div class="writer">
-                 <c:out value="${board.writer}"/>
+                 <c:if test="${board.isanonymous eq 'true'}">익명</c:if>
+				 <c:if test="${board.isanonymous eq 'false'}"><c:out value="${board.writer}"/></c:if>
             </div>
+            <span>&nbsp;&nbsp;&nbsp;</span>
             <div class="date">
-                 <fmt:formatDate pattern="yyyy. MM. dd" value="${board.regdate}"/>
+                 <fmt:formatDate pattern="yyyy. MM. dd HH:mm" value="${board.regdate}"/>
             </div>
         </div>
-       <div class="btn">
-                <a href="/board/update?bno=${board.bno}" role="button" class="edit_btn">EDIT</a>
-                <div class="delete_btn"id="btn-delete">DELETE</div>
-            </div>
+        <sec:authorize access="isAuthenticated()"> 
+        	<sec:authentication property="principal" var="pinfo"/>
+        	<c:if test="${pinfo.username eq board.userid}">
+		       	<div class="btn">
+		            <a href="/board/update?bno=${board.bno}" role="button" class="edit_btn">EDIT</a>
+		            <span>&nbsp;&nbsp;&nbsp;</span>
+		           	<div class="delete_btn"id="btn-delete">DELETE</div>
+		        </div>
+	        </c:if>
+	    </sec:authorize>
     </div>
-    <hr style="border:solid 0.5px black">
+    <hr style="border:solid 0.3px grey">
     <div class="content" style="white-space: pre-line;"> <!--줄바꿈 해주는거..-->
          <c:out value="${board.content}"/>
     </div>
 </div>
 
+</div>
 
 
 <%@include file = "../includes/footer.jsp" %>

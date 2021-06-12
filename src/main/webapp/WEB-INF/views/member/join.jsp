@@ -21,61 +21,61 @@
     .btn > div {
         margin: 2%;
     }
-    .write_btn {
+    .chk_btn {
         cursor:pointer;
     }
     .read_only{ display: none;}
 </style>
 </head>
 <body>
+
 		<!-- Page Header-->
         <header class="masthead" style="background-image: url('/resources/images/cafe_image.jpeg')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1>WRITE</h1>
+                            <h1>JOIN</h1>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
-		<div class="container">
-			<div class="wrap">
-	    			<form class="login100-form validate-form">
+		<div class="container" style="display: flex;justify-content: center;">
+			<br/><br/><br/><br/><br/>
+			<div class="wrap-login100">
+			
+	    			<form class="login100-form validate-form" id="loginForm" action="/login" method="post">
+	    				<input type="hidden" id="isCheckID" value="0">
 	        			<div class="wrap-input100 validate-input m-b-26">
-	          				<span class="label-input100">TITLE</span>
-	            			<input type="text" class="input100" id="title" placeholder="title">
+	          				<span class="label-input100">ID</span>
+	            			<input type="text" class="input100" id="id">
 	            			<span class="focus-input100"></span>
 	        			</div>
-	        			<div class="wrap-input100 validate-input m-b-26">
-	            				<span class="label-input100">WRITER</span>
-	            				<input type="text" class="input100" id="writer" value=<sec:authentication property="principal.member.userName"/> readonly>
-	            				<span class="focus-input100"></span>
-	        			</div>
-	        			<div class="flex-sb-m w-full p-b-30">
-							<div class="contact100-form-checkbox">
-								<input class="input-checkbox100" id="ckb1" type="checkbox" name="isAnonymous">
-								<label class="label-checkbox100" for="ckb1">
-									익명
-								</label>
+	        			<div class="chk_btn">
+							<div class="txt1" id="btn-chk">
+								ID 중복 체크
 							</div>
 						</div>
-	        			<div class="wrap-input100 validate-input">
-	            			<span class="label-input100">CONTENT</span>
-	            			<textarea class="form-control" id="content"></textarea>
+	        			<div class="wrap-input100 validate-input m-b-26">
+	            				<span class="label-input100">Password</span>
+	            				<input type="password" class="input100" id="password">
+	            				<span class="focus-input100"></span>
+	        			</div>
+	        			<div class="wrap-input100 validate-input m-b-26">
+	          				<span class="label-input100">Name</span>
+	            			<input type="text" class="input100" id="name">
 	            			<span class="focus-input100"></span>
 	        			</div>
-	        			<sec:authentication property="principal.username" var="userid"/>
-	        			<input type="hidden" id="user_id" value="${userid}"/>
 	    			</form>
-	    			 <div class="btn m-b-50">
+
+	    			<div class="btn m-b-50">
             			<a href="/board/list" class="cancel_btn" role="button" >CANCEL</a>
-           		 		<div class="write_btn" id="btn-save">WRITE</div>
+           		 		<div class="join_btn" id="btn-join">JOIN</div>
         			</div>
+        			<br/><br/><br/><br/><br/>
 			</div>
 		</div>
-		<br/><br/><br/><br/><br/>
 
 <%@include file = "../includes/footer.jsp" %>
 

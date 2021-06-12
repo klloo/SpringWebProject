@@ -3,6 +3,8 @@
 
 <!-- board.js 추가-->
 <script src="/resources/js/board.js"></script>
+<!-- member.js 추가-->
+<script src="/resources/js/member.js"></script>
 
 </body>
 </html>
