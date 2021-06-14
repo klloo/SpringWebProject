@@ -10,6 +10,8 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
+	
+	
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
     	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
     	<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@oracle12.cq6ej1zkyn7p.ap-northeast-2.rds.amazonaws.com:1521:ORCL"></property>
@@ -25,10 +27,14 @@
   		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+   		<property name="dataSource" ref="dataSource"/>
+   </bean>
+ 
+   
 	<mybatis-spring:scan base-package="com.huiy.mapper"/>
 	
-	<context:component-scan base-package="com.huiy.controller,com.huiy.service">
+	<context:component-scan base-package="com.huiy.controller,com.huiy.service,com.huiy.security">
 	</context:component-scan>
 	
 </beans>

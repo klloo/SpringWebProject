@@ -31,4 +31,13 @@
 	<insert id="insertAuth">
 		insert into tbl_member_auth(userid,auth) values(#{userid},'ROLE_USER')
 	</insert>
+	<update id="update">
+ 		update tbl_member
+    	set
+    	userpw = #{userpw},
+    	username = #{userName}
+    	where userid = #{userid}
+    </update>
+    
+	
 </mapper>

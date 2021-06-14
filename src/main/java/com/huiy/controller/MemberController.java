@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +25,19 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class MemberController {
 	
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	private BoardService boardService;
 	
-	@GetMapping("/login")
-	public String login() {
+	@RequestMapping("/login")
+	public String login(Authentication authentication) {
+		if(authentication!=null) 
+			return "member/duplicateLoginAlert";
 		return "member/login";
+	}
+	@PreAuthorize("hasAnyRole('ROLE_USER,ROLE_ADMIN')")
+	@GetMapping("/update")
+	public String update() {
+		return "member/update";
 	}
 	@GetMapping("/join")
 	public String join() {

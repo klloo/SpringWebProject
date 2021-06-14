@@ -21,7 +21,7 @@ import lombok.Setter;
 @RequestMapping("/board")
 public class BoardController {
 	
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	private BoardService boardService;
 	
 	@GetMapping("/list")

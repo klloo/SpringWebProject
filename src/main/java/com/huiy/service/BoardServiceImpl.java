@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.huiy.domain.BoardVO;
 import com.huiy.domain.Criteria;
@@ -14,7 +16,7 @@ import lombok.Setter;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	private BoardMapper mapper;
 	
 
@@ -23,8 +25,10 @@ public class BoardServiceImpl implements BoardService {
 		mapper.insertSelectKey(board);
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public BoardVO get(Long bno) {
+		mapper.updateViewcnt(bno);
 		return mapper.read(bno);
 	}
 

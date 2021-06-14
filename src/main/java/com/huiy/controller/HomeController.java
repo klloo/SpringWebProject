@@ -1,7 +1,6 @@
 package com.huiy.controller;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -16,8 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import lombok.Data;
-import lombok.Setter;
+
 
 /**
  * Handles requests for the application home page.
@@ -25,7 +23,7 @@ import lombok.Setter;
 @Controller
 public class HomeController {
 	//위에서 DataSource를 빈으로 등록했기 때문에 의존성 주입 가능
-	@Setter(onMethod_ = {@Autowired})
+	@Autowired
 	private DataSource dataSource;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);

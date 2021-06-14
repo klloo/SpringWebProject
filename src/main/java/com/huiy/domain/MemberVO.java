@@ -2,10 +2,11 @@ package com.huiy.domain;
 
 import java.util.Date;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-import lombok.Data;
-
-@Data
+@Getter
+@Setter
 public class MemberVO {
 	private String userid;
 	private String userpw;

@@ -58,6 +58,14 @@
     	updatedate = sysdate
     	where bno = #{bno}
     </update>
+    
+    	
+    <update id="updateViewcnt">
+ 		update tbl_board
+    	set
+		viewcnt = viewcnt+1
+    	where bno = #{bno}
+    </update>
     	
     <delete id="delete">
  		delete from tbl_board where bno = #{bno}	

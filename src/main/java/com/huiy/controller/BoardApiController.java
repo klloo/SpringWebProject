@@ -20,7 +20,7 @@ import lombok.Setter;
 @RequestMapping("/api")
 public class BoardApiController {
 	
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	private BoardService boardService;
 	
 	@GetMapping("/board/{bno}")

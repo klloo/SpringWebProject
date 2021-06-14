@@ -4,6 +4,11 @@
 <%@include file = "../includes/header.jsp" %>
 <%@include file = "../includes/top_menu.jsp" %>
 
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/resources/css/util.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/main.css?after">
+<!--===============================================================================================-->
+
 <style>
         *{
             border-collapse: collapse;
@@ -13,6 +18,7 @@
             color: black;
             list-style: none;
         }
+        a:hover {  color: black; text-decoration: none;}
         .title{
             margin: 8%;
             text-align: center;
@@ -29,7 +35,7 @@
             padding-top: 2%;
             padding-bottom: 2%;
         }
-        .write_btn a{
+        .btn-edit{
             font-size: 80%;
             font-style: italic;
         }
@@ -43,10 +49,51 @@
         .table > tbody > tr > td:last-child{
             color:grey;
         }
+        .date{
+            color:grey;
+		}
+
 		.paging {
         display: flex;
         justify-content: center;
        }
+		       /* The Modal (background) */
+		.searchModal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 10; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+		/* Modal Content/Box */
+		.search-modal-content {
+		margin-top:10%; /* 15% from the top and centered */
+		}
+		.btn {
+	        display: flex;
+	        justify-content: center;
+	        padding-top:0%;
+	        margin-left:15%;
+	    }
+	    .cancel_btn {
+	        margin: 10%;
+	        color: grey;
+	        text-decoration=none;
+	    }
+	    .btn > div {
+	        margin: 10%;
+	    }
+	    .write_btn {
+	        cursor:pointer;
+	    }
+	    .read_only{ display: none;}
+	
+
      </style>
  
 
@@ -64,11 +111,42 @@
         </header>
 <div class="table_div">
 	
-   
+   <div id="modal" class="searchModal">
+		<div class="search-modal-content">	
+			<div class="container" style="display: flex;justify-content: center;">
+			<br/><br/><br/><br/><br/>
+			<div class="wrap-login100">
+					<div class="login100-form-title">
+						<span class="login100-form-title-1">
+							password check
+						</span>
+					</div>
+					
+	    			<form class="login100-form validate-form" id="loginForm" action="/login" method="post">
+	        			
+	        			<div class="wrap-input100 validate-input m-b-60">
+	            				<span class="label-input100">Password</span>
+	            				<input type="password" class="input100" id="password" name="password">
+	            				<span class="focus-input100"></span>
+	        			</div>
+	        			<sec:authentication property="principal.member.userid" var="userid"/>
+	        			<input type="hidden" id="id" value="${userid}"/>
+	        			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		        		<div class="btn">
+	            			<div class="cancel_btn" id="btn-cancel" role="button" >CANCEL</div>
+	           		 		<div class="login_btn" id="btn-pwchk">OK</div>
+	        			</div>
+	    			</form>
+
+	    			
+			</div>
+		</div>
+		</div>
+	</div>
     
     <div class="write_btn" style="float:right">
 		<div>
-			<a href="/member/update" >EDIT</a>
+			<div type="button" id="btn-edit" class="btn-edit">EDIT</div>
 		</div>
 	</div>
 	<h5>INFO</h5>
@@ -101,6 +179,7 @@
             <th>TITLE</th>
             <th>WRITER</th>
             <th>DATE</th>
+            <th>VIEWS</th>
         </tr>
         </thead>
         <tbody id="tbody">
@@ -114,7 +193,8 @@
 						<c:if test="${board.isanonymous eq 'true'}">익명</c:if>
 						<c:if test="${board.isanonymous eq 'false'}"><c:out value="${board.writer}"/></c:if>
 					</td>
-					<td> <fmt:formatDate pattern="yyyy. MM. dd" value="${board.regdate}"/></td>
+					<td class="date"> <fmt:formatDate pattern="yyyy. MM. dd" value="${board.regdate}"/></td>
+					<td> <c:out value="${board.viewcnt}"/> </td>
 				</tr>
 			</c:forEach>
         </tbody>

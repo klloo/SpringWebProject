@@ -6,7 +6,7 @@
 
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="/resources/css/util.css">
-<link rel="stylesheet" type="text/css" href="/resources/css/main.css?after">
+<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
 <!--===============================================================================================-->
 <style>
 	.btn {
@@ -25,6 +25,12 @@
         cursor:pointer;
     }
     .read_only{ display: none;}
+    .checks input[type="checkbox"]:checked + label:before { 
+		/* 체크박스를 체크했을때 */
+		 content: '\2714';
+		  /* 체크표시 유니코드 사용 */ 
+		  color: #99a1a7; 
+		}
 </style>
 </head>
 <body>
@@ -54,7 +60,7 @@
 	            				<span class="focus-input100"></span>
 	        			</div>
 	        			<div class="flex-sb-m w-full p-b-30">
-							<div class="contact100-form-checkbox">
+							<div class="contact100-form-checkbox checks">
 								<input class="input-checkbox100" id="ckb1" type="checkbox" name="isAnonymous">
 								<label class="label-checkbox100" for="ckb1">
 									익명

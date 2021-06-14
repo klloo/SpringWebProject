@@ -12,7 +12,8 @@
 	<bean id="customUserDetailsService" class ="com.huiy.security.CustomUserDetailsService"/>
 	
 	<security:http>
-		<security:form-login login-page="/member/login"/>
+		<security:form-login login-page="/member/login"
+		authentication-failure-handler-ref="userLoginFailHandler"/>
 		<security:csrf disabled="true"/>
 		<security:logout logout-url="/logout" logout-success-url="/board/list" invalidate-session="true"/>
 	</security:http>

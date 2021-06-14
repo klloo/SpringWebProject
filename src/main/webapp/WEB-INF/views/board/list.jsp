@@ -15,6 +15,7 @@
             color: black;
             list-style: none;
         }
+        a:hover {  color: black; text-decoration: none;}
         .title{
             margin: 8%;
             text-align: center;
@@ -45,6 +46,9 @@
         .table > tbody > tr > td:last-child{
             color:grey;
         }
+        .date{
+            color:grey;
+        }
 		.paging {
         display: flex;
         justify-content: center;
@@ -73,6 +77,7 @@
             <th>TITLE</th>
             <th>WRITER</th>
             <th>DATE</th>
+            <th>VIEWS</th>
         </tr>
         </thead>
         <tbody id="tbody">
@@ -86,7 +91,8 @@
 						<c:if test="${board.isanonymous eq 'true'}">익명</c:if>
 						<c:if test="${board.isanonymous eq 'false'}"><c:out value="${board.writer}"/></c:if>
 					</td>
-					<td> <fmt:formatDate pattern="yyyy. MM. dd" value="${board.regdate}"/></td>
+					<td class="date"> <fmt:formatDate pattern="yyyy. MM. dd" value="${board.regdate}"/></td>
+					<td> <c:out value="${board.viewcnt}"/> </td>
 				</tr>
 			</c:forEach>
         </tbody>

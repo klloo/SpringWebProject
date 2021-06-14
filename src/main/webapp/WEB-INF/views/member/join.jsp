@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@include file = "../includes/header.jsp" %>
 <%@include file = "../includes/top_menu.jsp" %>
 
@@ -12,14 +13,16 @@
 	.btn {
         display: flex;
         justify-content: center;
+        padding-top:0%;
+        margin-left:15%;
     }
     .btn > a {
-        margin: 2%;
+       	margin: 20%;
         color: grey;
         text-decoration=none;
     }
     .btn > div {
-        margin: 2%;
+        margin: 20%;
     }
     .chk_btn {
         cursor:pointer;
@@ -62,17 +65,18 @@
 	            				<input type="password" class="input100" id="password">
 	            				<span class="focus-input100"></span>
 	        			</div>
-	        			<div class="wrap-input100 validate-input m-b-26">
+	        			<div class="wrap-input100 validate-input m-b-100">
 	          				<span class="label-input100">Name</span>
 	            			<input type="text" class="input100" id="name">
 	            			<span class="focus-input100"></span>
 	        			</div>
+	        			<div class="btn validate-input">
+            				<a href="/board/list" class="cancel_btn" role="button" >CANCEL</a>
+           		 			<div class="join_btn" id="btn-join">JOIN</div>
+        				</div>
 	    			</form>
 
-	    			<div class="btn m-b-50">
-            			<a href="/board/list" class="cancel_btn" role="button" >CANCEL</a>
-           		 		<div class="join_btn" id="btn-join">JOIN</div>
-        			</div>
+	    			
         			<br/><br/><br/><br/><br/>
 			</div>
 		</div>

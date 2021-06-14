@@ -35,33 +35,8 @@
 	padding: 0px; 
 	box-sizing: border-box;
 }
-
-body, html {
-	height: 100%;
-	font-family: Poppins-Regular, sans-serif;
-}
-
 /*---------------------------------------------*/
-a {
-	font-family: Poppins-Regular;
-	font-size: 14px;
-	line-height: 1.7;
-	color: #666666;
-	margin: 0px;
-	transition: all 0.4s;
-	-webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-}
 
-a:focus {
-	outline: none !important;
-}
-
-a:hover {
-	text-decoration: none;
-  color: #57b846;
-}
 
 /*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6 {
@@ -76,10 +51,6 @@ p {
 	margin: 0px;
 }
 
-ul, li {
-	margin: 0px;
-	list-style-type: none;
-}
 
 
 /*---------------------------------------------*/
@@ -133,20 +104,6 @@ label {
   margin: 0;
 }
 
-/*---------------------------------------------*/
-button {
-	outline: none !important;
-	border: none;
-	background: transparent;
-}
-
-button:hover {
-	cursor: pointer;
-}
-
-iframe {
-	border: none !important;
-}
 
 
 /*//////////////////////////////////////////////////////////////////
@@ -161,10 +118,6 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
 
-.limiter {
-  width: 100%;
-  margin: 130px auto;
-}
 
 .container-login100 {
   width: 100%;  
@@ -450,69 +403,8 @@ input.input100 {
 /*------------------------------------------------------------------
 [ Alert validate ]*/
 
-.validate-input {
-  position: relative;
-}
+.
 
-.alert-validate::before {
-  content: attr(data-validate);
-  position: absolute;
-  max-width: 70%;
-  background-color: #fff;
-  border: 1px solid #c80000;
-  border-radius: 2px;
-  padding: 4px 25px 4px 10px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  right: 2px;
-  pointer-events: none;
-
-  font-family: Poppins-Medium;
-  color: #c80000;
-  font-size: 13px;
-  line-height: 1.4;
-  text-align: left;
-
-  visibility: hidden;
-  opacity: 0;
-
-  -webkit-transition: opacity 0.4s;
-  -o-transition: opacity 0.4s;
-  -moz-transition: opacity 0.4s;
-  transition: opacity 0.4s;
-}
-
-.alert-validate::after {
-  content: "\f06a";
-  font-family: FontAwesome;
-  display: block;
-  position: absolute;
-  color: #c80000;
-  font-size: 15px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  right: 8px;
-}
-
-.alert-validate:hover:before {
-  visibility: visible;
-  opacity: 1;
-}
-
-@media (max-width: 992px) {
-  .alert-validate::before {
-    visibility: visible;
-    opacity: 1;
-  }
-}
 
 
 

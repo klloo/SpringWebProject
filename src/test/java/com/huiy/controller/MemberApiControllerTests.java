@@ -3,6 +3,7 @@ package com.huiy.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,6 +56,19 @@ public class MemberApiControllerTests {
 				.contentType(MediaType.APPLICATION_JSON))
 		.andDo(print());
 	}
+
+	@Test
+	public void testModify() throws Exception{
+		MemberVO member = new MemberVO();
+		member.setUserid("as");
+		member.setUserpw("as");
+		member.setUserName("asas");
+		Gson gson = new Gson();
+		this.mockMvc.perform(put("/api/member/")
+				.content(gson.toJson(member))
+				.contentType(MediaType.APPLICATION_JSON))
+		.andDo(print());
+	}
 	
 	@Test
 	public void testIdCheck() throws Exception{
@@ -63,6 +77,26 @@ public class MemberApiControllerTests {
 		.andDo(print());
 		//중복되지 않는 경우
 		this.mockMvc.perform(get("/api/member/id/check/aaab"))
+		.andDo(print());
+	}
+	
+	@Test
+	public void testPwCheck() throws Exception{
+		//맞은 경우
+		MemberVO member = new MemberVO();
+		member.setUserid("as");
+		member.setUserpw("as");
+		Gson gson = new Gson();
+		this.mockMvc.perform(post("/api/member/pw/check")
+				.content(gson.toJson(member))
+				.contentType(MediaType.APPLICATION_JSON))
+		.andDo(print());
+		//틀린 경우
+		member.setUserid("as");
+		member.setUserpw("a");
+		this.mockMvc.perform(post("/api/member/pw/check")
+				.content(gson.toJson(member))
+				.contentType(MediaType.APPLICATION_JSON))
 		.andDo(print());
 	}
 }

@@ -25,6 +25,8 @@
             font-style: italic;
             padding-right: 10%;
         }
+         a:hover {  color: black; text-decoration: none;}
+
         .delete_btn{
             font-size: 80%;
             font-style: italic;
@@ -46,6 +48,10 @@
         }
         .writer {
         	font-size: 90%;
+        }
+        .views {
+       	 	color: rgb(153, 153, 153);
+            font-size: 90%;
         }
         .post_form{
             padding-left: 15%;
@@ -75,6 +81,11 @@
             <div class="date">
                  <fmt:formatDate pattern="yyyy. MM. dd HH:mm" value="${board.regdate}"/>
             </div>
+             <span>&nbsp;&nbsp;&nbsp;</span>
+            <div class="views">
+                조회<span>&nbsp;</span><c:out value="${board.viewcnt}"/>
+            </div>
+            
         </div>
         <sec:authorize access="isAuthenticated()"> 
         	<sec:authentication property="principal" var="pinfo"/>
