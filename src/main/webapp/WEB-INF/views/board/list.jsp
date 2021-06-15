@@ -4,7 +4,10 @@
 <%@include file = "../includes/header.jsp" %>
 <%@include file = "../includes/top_menu.jsp" %>
 <%@include file = "../includes/page_header.jsp" %>
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/resources/css_table/bootstrap.min.css">
 
 <style>
         *{
@@ -70,18 +73,22 @@
     <br><br><br>
 
     <!-- 목록 출력 영역 -->
-    <table class="table">
-        <thead class="thead">
-        <tr>
-            <th>NO</th>
+   
+    
+      <div class="table-responsive">
+
+        <table class="table custom-table">
+          <thead>
+            <tr>
+             <th>NO</th>
             <th>TITLE</th>
             <th>WRITER</th>
             <th>DATE</th>
             <th>VIEWS</th>
-        </tr>
-        </thead>
-        <tbody id="tbody">
-        	<c:set var="no" value="${(pageMaker.cri.pageNum-1)*10+1}"/>
+            </tr>
+          </thead>
+          <tbody>
+            <c:set var="no" value="${(pageMaker.cri.pageNum-1)*10+1}"/>
         	<c:forEach var="board" items="${boardList}">
         		<tr>
 					<td> <c:out value="${no}"/> </td>
@@ -95,8 +102,12 @@
 					<td> <c:out value="${board.viewcnt}"/> </td>
 				</tr>
 			</c:forEach>
-        </tbody>
-    </table>
+          
+            
+          </tbody>
+        </table>
+
+  </div>
     <br/> <br/> <br/>
     <div class="paging">
     	<ul class="pagination">

@@ -1,6 +1,12 @@
 package com.huiy.service;
 
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -8,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.huiy.domain.MemberVO;
 import com.huiy.mapper.MemberMapper;
+import com.huiy.security.CustomUserDetailsService;
+import com.huiy.security.domain.CustomUser;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -17,6 +25,10 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
 	private PasswordEncoder pwencoder;
+	
+
+	@Autowired
+	private CustomUserDetailsService userService;
 	
 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
@@ -46,7 +58,10 @@ public class MemberServiceImpl implements MemberService{
 	public void modify(MemberVO memberVO) {
 		memberVO.setUserpw(pwencoder.encode(memberVO.getUserpw()));
 		memberMapper.update(memberVO);
+		userService.reload(memberVO.getUserid());
 	}
+	
+	
 
 
 }

@@ -55,9 +55,9 @@
 	            			<input type="text" class="input100" id="id">
 	            			<span class="focus-input100"></span>
 	        			</div>
-	        			<div class="chk_btn">
+	        			<div class="chk_btn m-b-26">
 							<div class="txt1" id="btn-chk">
-								ID 중복 체크
+								<span>&nbsp;&nbsp;</span>ID 중복 체크
 							</div>
 						</div>
 	        			<div class="wrap-input100 validate-input m-b-26">

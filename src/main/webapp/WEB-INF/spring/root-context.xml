@@ -34,7 +34,7 @@
    
 	<mybatis-spring:scan base-package="com.huiy.mapper"/>
 	
-	<context:component-scan base-package="com.huiy.controller,com.huiy.service,com.huiy.security">
+	<context:component-scan base-package="com.huiy.controller,com.huiy.service">
 	</context:component-scan>
 	
 </beans>

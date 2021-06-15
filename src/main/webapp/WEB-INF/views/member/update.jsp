@@ -10,21 +10,39 @@
 <!--===============================================================================================-->
 <style>
 	.btn {
-        display: flex;
-        justify-content: center;
-    }
-    .btn > a {
-        margin: 2%;
-        color: grey;
-        text-decoration=none;
-    }
+	    display: flex;
+	    justify-content: center;
+	}
+	.btn > a {
+	    margin: 2%;
+	    color: grey;
+	    text-decoration=none;
+	}
     .btn > div {
-        margin: 2%;
+         margin: 2%;
     }
     .chk_btn {
         cursor:pointer;
     }
     .read_only{ display: none;}
+           /* The Modal (background) */
+		.searchModal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 10; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+		/* Modal Content/Box */
+		.search-modal-content {
+		margin-top:10%; /* 15% from the top and centered */
+		}
+		
 </style>
 </head>
 <body>
@@ -41,6 +59,37 @@
                 </div>
             </div>
         </header>
+         <div id="modal" class="searchModal">
+		<div class="search-modal-content">	
+			<div class="container" style="display: flex;justify-content: center;">
+			<br/><br/><br/><br/><br/>
+			<div class="wrap-login100">
+					<div class="login100-form-title">
+						<span class="login100-form-title-1">
+							password check
+						</span>
+					</div>
+					
+	    			<form class="login100-form validate-form">
+	        			
+	        			<div class="wrap-input100 validate-input m-b-60">
+	            				<span class="label-input100">Password</span>
+	            				<input type="password" class="input100" id="password" name="password">
+	            				<span class="focus-input100"></span>
+	        			</div>
+	        			
+		        		<div class="btn" style=" padding-top:0%; margin-left:15%;">
+	            			<div class="cancel_btn" id="btn-cancel" role="button" style=" margin: 10%;color: grey;text-decoration=none;">CANCEL</div>
+	           		 		<div class="login_btn" id="btn-pwchk" style=" margin: 10%;">OK</div>
+	        			</div>
+	    			</form>
+
+	    			
+			</div>
+		</div>
+		</div>
+	</div>
+    
 		<div class="container" style="display: flex;justify-content: center;">
 			<br/><br/><br/><br/><br/>
 			<div class="wrap-login100">
@@ -54,15 +103,14 @@
 	        			</div>
 	        			<div class="wrap-input100 validate-input m-b-26">
 	            				<span class="label-input100">Password</span>
-	            				<input type="password" class="input100" id="password">
+	            				<input type="password" class="input100" id="newpassword">
 	            				<span class="focus-input100"></span>
 	        			</div>
 	        			<div class="wrap-input100 validate-input m-b-26">
 	          				<span class="label-input100">Name</span>
-	            			<input type="text" class="input100" id="name">
+	            			<input type="text" class="input100" id="newname">
 	            			<span class="focus-input100"></span>
 	        			</div>
-	        			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	    			</form>
 
 	    			<div class="btn m-b-50">

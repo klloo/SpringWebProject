@@ -8,6 +8,8 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/util.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/main.css?after">
 <!--===============================================================================================-->
+<link rel="stylesheet" href="/resources/css_table/bootstrap.min.css">
+
 
 <style>
         *{
@@ -57,23 +59,7 @@
         display: flex;
         justify-content: center;
        }
-		       /* The Modal (background) */
-		.searchModal {
-		display: none; /* Hidden by default */
-		position: fixed; /* Stay in place */
-		z-index: 10; /* Sit on top */
-		left: 0;
-		top: 0;
-		width: 100%; /* Full width */
-		height: 100%; /* Full height */
-		overflow: auto; /* Enable scroll if needed */
-		background-color: rgb(0,0,0); /* Fallback color */
-		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-		}
-		/* Modal Content/Box */
-		.search-modal-content {
-		margin-top:10%; /* 15% from the top and centered */
-		}
+		
 		.btn {
 	        display: flex;
 	        justify-content: center;
@@ -111,42 +97,10 @@
         </header>
 <div class="table_div">
 	
-   <div id="modal" class="searchModal">
-		<div class="search-modal-content">	
-			<div class="container" style="display: flex;justify-content: center;">
-			<br/><br/><br/><br/><br/>
-			<div class="wrap-login100">
-					<div class="login100-form-title">
-						<span class="login100-form-title-1">
-							password check
-						</span>
-					</div>
-					
-	    			<form class="login100-form validate-form" id="loginForm" action="/login" method="post">
-	        			
-	        			<div class="wrap-input100 validate-input m-b-60">
-	            				<span class="label-input100">Password</span>
-	            				<input type="password" class="input100" id="password" name="password">
-	            				<span class="focus-input100"></span>
-	        			</div>
-	        			<sec:authentication property="principal.member.userid" var="userid"/>
-	        			<input type="hidden" id="id" value="${userid}"/>
-	        			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		        		<div class="btn">
-	            			<div class="cancel_btn" id="btn-cancel" role="button" >CANCEL</div>
-	           		 		<div class="login_btn" id="btn-pwchk">OK</div>
-	        			</div>
-	    			</form>
-
-	    			
-			</div>
-		</div>
-		</div>
-	</div>
-    
+  
     <div class="write_btn" style="float:right">
 		<div>
-			<div type="button" id="btn-edit" class="btn-edit">EDIT</div>
+			<a href="/member/update" id="btn-edit" class="btn-edit">EDIT</a>
 		</div>
 	</div>
 	<h5>INFO</h5>
@@ -172,18 +126,21 @@
     <div style="margin-bottom:20px;">
     <h5>${total}개의 글</h5>
     </div>
-    <table class="table">
-        <thead class="thead">
-        <tr>
-            <th>NO</th>
+   
+      <div class="table-responsive">
+
+        <table class="table custom-table">
+          <thead>
+            <tr>
+             <th>NO</th>
             <th>TITLE</th>
             <th>WRITER</th>
             <th>DATE</th>
             <th>VIEWS</th>
-        </tr>
-        </thead>
-        <tbody id="tbody">
-        	<c:set var="no" value="${(pageMaker.cri.pageNum-1)*10+1}"/>
+            </tr>
+          </thead>
+          <tbody>
+            <c:set var="no" value="${(pageMaker.cri.pageNum-1)*10+1}"/>
         	<c:forEach var="board" items="${boardList}">
         		<tr>
 					<td> <c:out value="${no}"/> </td>
@@ -197,8 +154,12 @@
 					<td> <c:out value="${board.viewcnt}"/> </td>
 				</tr>
 			</c:forEach>
-        </tbody>
-    </table>
+          
+            
+          </tbody>
+        </table>
+
+  </div>
     <br/> <br/> <br/>
     <div class="paging">
     	<ul class="pagination">

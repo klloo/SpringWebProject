@@ -7,6 +7,9 @@
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="/resources/css/util.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+<link rel="stylesheet" href="/resources/summernote/css/summernote-lite.css">
+<script src="/resources/summernote/js/summernote-lite.js"></script>
+<script src="/resources/summernote/js/lang/summernote-ko-KR.js"></script>
 <!--===============================================================================================-->
 <style>
 	.btn {
@@ -69,7 +72,7 @@
 						</div>
 	        			<div class="wrap-input100 validate-input">
 	            			<span class="label-input100">CONTENT</span>
-	            			<textarea class="form-control" id="content"></textarea>
+	            			<textarea id="summernote" class="form-control"></textarea>
 	            			<span class="focus-input100"></span>
 	        			</div>
 	        			<sec:authentication property="principal.username" var="userid"/>

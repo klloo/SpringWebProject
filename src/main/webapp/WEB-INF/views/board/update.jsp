@@ -8,6 +8,11 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/util.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/main.css?after">
 <!--===============================================================================================-->
+
+<link rel="stylesheet" href="/resources/summernote/css/summernote-lite.css">
+<script src="/resources/summernote/js/summernote-lite.js"></script>
+<script src="/resources/summernote/js/lang/summernote-ko-KR.js"></script>
+
 <style>
 	.btn {
         display: flex;
@@ -74,7 +79,7 @@
 						</div>
 	        			<div class="wrap-input100 validate-input">
 	            			<span class="label-input100">CONTENT</span>
-	            			<textarea class="form-control" id="content">${board.content}</textarea>
+	            			<textarea class="form-control" id="summernote">${board.content}</textarea>
 	            			<span class="focus-input100"></span>
 	        			</div>
 	    			</form>

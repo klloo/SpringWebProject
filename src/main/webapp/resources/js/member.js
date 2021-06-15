@@ -6,10 +6,7 @@ var main = {
 		
 		$("#loginmodal").show();
 		
-        $('#btn-edit').on('click',function() {
-	        $("#modal").show();
-        });
-         $('#btn-cancel').on('click',function() {
+        $('#btn-cancel').on('click',function() {
 	        $('.searchModal').hide();
         });
         $('#btn-login').on('click',function() {
@@ -27,10 +24,10 @@ var main = {
 			_this.pwCheck();
 		});
 		$('#btn-update-member').on('click',function () {
-			_this.modify();
+			 $("#modal").show();
 		});
 		
-	},	
+	},
 	login : function() {
 		var loginForm = $('#loginForm');
 		if( $('#id').val().length == 0){
@@ -77,8 +74,8 @@ var main = {
     modify : function () {
 		var data = {
 			userid: $('#id').val(),
-			userpw: sha256($('#password').val()),
-			userName: $('#name').val()
+			userpw: sha256($('#newpassword').val()),
+			userName: $('#newname').val()
 		};
 		if(data.userName == "익명") {
 			alert("사용할 수 없는 이름입니다.");
@@ -91,9 +88,8 @@ var main = {
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            alert('회원정보가 수정되었습니다. 다시 로그인해주세요.');
-            window.location.href = '/logout';
-            window.location.href = '/member/login';
+            alert('회원정보가 수정되었습니다.');
+            window.location.href = '/member/mypage';
         }).fail(function (error) {
             alert('회원정보를 수정하지 못하였습니다.');
         });
@@ -139,7 +135,7 @@ var main = {
             data: JSON.stringify(data),
 			success: function(result){ //callback 함수
 				if(result == 'true'){
-					window.location.href = '/member/update';
+					main.modify();
 				}
 				else{
 					alert("비밀번호가 틀렸습니다.");

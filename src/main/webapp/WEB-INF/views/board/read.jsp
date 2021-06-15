@@ -4,7 +4,7 @@
 <%@include file = "../includes/header.jsp" %>
 <%@include file = "../includes/top_menu.jsp" %>
 <%@include file = "../includes/page_header.jsp" %>
-
+<link rel="stylesheet" href="/resources/css_table/bootstrap.min.css">
 <style>
         *{
             border-collapse: collapse;
@@ -68,7 +68,7 @@
      </style>
 <br/><br/><br/>
 <input type="text" class="id_info" id="id" value="${board.bno}" readonly>
-<div class="container">
+
 <div class="post_form">
     <h2 class="title"> <c:out value="${board.title}"></c:out></h2>
     <div class="under">
@@ -98,13 +98,14 @@
 	        </c:if>
 	    </sec:authorize>
     </div>
-    <hr style="border:solid 0.3px grey">
-    <div class="content" style="white-space: pre-line;"> <!--줄바꿈 해주는거..-->
-         <c:out value="${board.content}"/>
+    <hr style="border:solid 0.2px grey">
+    <br/>
+    <div class="content" > 
+        ${board.content}
     </div>
 </div>
 
-</div>
+
 
 
 <%@include file = "../includes/footer.jsp" %>

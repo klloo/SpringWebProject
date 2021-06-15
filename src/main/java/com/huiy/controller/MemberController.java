@@ -40,7 +40,9 @@ public class MemberController {
 		return "member/update";
 	}
 	@GetMapping("/join")
-	public String join() {
+	public String join(Authentication authentication) {
+		if(authentication!=null) 
+			return "member/duplicateLoginAlert";
 		return "member/join";
 	}
 	@PreAuthorize("hasAnyRole('ROLE_USER,ROLE_ADMIN')")
