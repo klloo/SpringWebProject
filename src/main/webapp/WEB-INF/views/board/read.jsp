@@ -103,6 +103,14 @@
     <div class="content" > 
         ${board.content}
     </div>
+    <div class="likes" >
+    <img class="heart" type="button" src="/resources/images/heart_blank.png" height=25px/>
+    <span class="views">&nbsp;<c:out value="${board.likecnt}"/></span>
+    </div>  
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
 </div>
 
 

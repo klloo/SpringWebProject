@@ -6,10 +6,10 @@
 <mapper namespace="com.huiy.mapper.BoardMapper">
 	<select id="getListWithPaging" resultType="com.huiy.domain.BoardVO">
  		<![CDATA[
-			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous
+			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt
 			from (
 			 select /*+INDEX_DESC(tbl_board pk_board)*/
-			  rownum rn,bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous
+			  rownum rn,bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt
 			 from tbl_board
 			 where rownum <= #{pageNum} * #{amount}
 			)
@@ -19,10 +19,10 @@
     
     <select id="getListWithUserPaging" resultType="com.huiy.domain.BoardVO">
 		<![CDATA[
-			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous
+			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt
 			from (
 			 select /*+INDEX_DESC(tbl_board pk_board)*/
-			  rownum rn,bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous
+			  rownum rn,bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt
 			 from tbl_board
 			 where rownum <= #{cri.pageNum} * #{cri.amount}
 			 and userid=#{userid}

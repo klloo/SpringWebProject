@@ -29,9 +29,6 @@ public class MemberApiController {
 	private MemberService memberService;
 	
 	
-	
-	
-	
 	@PostMapping("/member")
 	public String register(@RequestBody MemberVO member) {
 		memberService.register(member);

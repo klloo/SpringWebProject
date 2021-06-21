@@ -49,6 +49,9 @@
         .table > tbody > tr > td:last-child{
             color:grey;
         }
+        .views{
+            color:grey;
+        }
         .date{
             color:grey;
         }
@@ -56,12 +59,36 @@
         display: flex;
         justify-content: center;
        }
+       .title {
+       	width:400px;
+       }
+       .dateh {
+       	width: 200px;
+       }
+       .today{
+       	font-size: 150%;
+       }
+       .dataTime {
+       		color:grey;
+       		font-size: 60%;
+       }
+       .air_info {
+       }
      </style>
  
 
 
 <div class="table_div">
-
+	<div id="air_info">
+		<div class="today">
+		&#x1F32B;<c:out value=" ${today} 오늘의 미세먼지"/>
+		<span class="dataTime" id="dataTime"></span>
+		<hr style="border:solid 0.1px grey">
+		</div>
+		
+		<div id="cause" style="margin:5px"></div>
+		<div id="overall" style="margin:5px"></div>
+	</div>
 	<sec:authorize access="isAuthenticated()"> 
 	    <div class="write_btn" style="float:right">
 	        <div>
@@ -80,11 +107,12 @@
         <table class="table custom-table">
           <thead>
             <tr>
-             <th>NO</th>
-            <th>TITLE</th>
+            <th>NO</th>
+            <th class="title">TITLE</th>
             <th>WRITER</th>
-            <th>DATE</th>
+            <th class="dateh">DATE</th>
             <th>VIEWS</th>
+            <th>LIKES</th>
             </tr>
           </thead>
           <tbody>
@@ -99,7 +127,8 @@
 						<c:if test="${board.isanonymous eq 'false'}"><c:out value="${board.writer}"/></c:if>
 					</td>
 					<td class="date"> <fmt:formatDate pattern="yyyy. MM. dd" value="${board.regdate}"/></td>
-					<td> <c:out value="${board.viewcnt}"/> </td>
+					<td class="views"> <c:out value="${board.viewcnt}"/> </td>
+					<td> <c:out value="${board.likecnt}"/> </td>
 				</tr>
 			</c:forEach>
           

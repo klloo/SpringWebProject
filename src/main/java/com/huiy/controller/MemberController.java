@@ -31,7 +31,7 @@ public class MemberController {
 	@RequestMapping("/login")
 	public String login(Authentication authentication) {
 		if(authentication!=null) 
-			return "member/duplicateLoginAlert";
+			return "member/accessdenied";
 		return "member/login";
 	}
 	@PreAuthorize("hasAnyRole('ROLE_USER,ROLE_ADMIN')")
@@ -42,7 +42,7 @@ public class MemberController {
 	@GetMapping("/join")
 	public String join(Authentication authentication) {
 		if(authentication!=null) 
-			return "member/duplicateLoginAlert";
+			return "member/accessdenied";
 		return "member/join";
 	}
 	@PreAuthorize("hasAnyRole('ROLE_USER,ROLE_ADMIN')")

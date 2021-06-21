@@ -12,8 +12,8 @@ import com.huiy.domain.MemberVO;
 import com.huiy.mapper.MemberMapper;
 import com.huiy.security.domain.CustomUser;
 
-import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+
 
 @Log4j
 public class CustomUserDetailsService implements UserDetailsService{

@@ -53,6 +53,7 @@ public class BoardApiController {
 		boardService.modify(board);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@DeleteMapping("/{bno}")
 	public void remove(@PathVariable Long bno) {
 		boardService.remove(bno);

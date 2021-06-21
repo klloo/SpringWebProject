@@ -15,4 +15,5 @@ public class BoardVO {
 	private int viewcnt;
 	private String userid;
 	private String isanonymous;
+	private int likecnt;
 }

@@ -1,9 +1,12 @@
 package com.huiy.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +33,9 @@ public class BoardController {
 		int total = boardService.getAllList().size();
 		model.addAttribute("boardList",boardList);
 		model.addAttribute("pageMaker",new PageDTO(cri, total));
+		SimpleDateFormat format = new SimpleDateFormat ( "yyyy.MM.dd");
+		String today = format.format(new Date());
+		model.addAttribute("today", today);
 		return "board/list";
 	}
 	
@@ -46,8 +52,11 @@ public class BoardController {
 	}
 	@PreAuthorize("hasAnyRole('ROLE_USER,ROLE_ADMIN')")
 	@GetMapping("/update")
-	public String modify(@RequestParam("bno") Long bno, Model model) {
+	public String modify(@RequestParam("bno") Long bno, Model model,Authentication authentication) {
 		BoardVO board = boardService.get(bno);
+		String userid = authentication.getName();
+		if(!board.getUserid().equals(userid))
+			return "member/accessdenied";
 		model.addAttribute("board",board);
 		return "board/update";
 	}
