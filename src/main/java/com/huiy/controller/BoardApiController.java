@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 import com.huiy.domain.BoardVO;
+import com.huiy.domain.LikeVO;
 import com.huiy.service.BoardService;
 
 import lombok.Setter;
@@ -84,6 +86,27 @@ public class BoardApiController {
 		}
 		String a = jsonObject.toString();
 		return a; 
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/heart/{bno}")
+	public String like(@PathVariable Long bno,Authentication authentication) {
+		LikeVO like = new LikeVO();
+		String userid = authentication.getName();
+		like.setBno(bno);
+		like.setUserid(userid);
+		boardService.like(like);
+		String likes = boardService.get(bno).getLikecnt()+"";
+		return likes;
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@DeleteMapping("/heart/{bno}")
+	public String likeCancel(@PathVariable Long bno,Authentication authentication) {
+		String userid = authentication.getName();
+		boardService.likeCancel(userid, bno);
+		String likes = boardService.get(bno).getLikecnt()+"";
+		return likes;
 	}
 
 }

@@ -51,9 +51,18 @@ public class MemberController {
 		String userid = principal.getName();
 		List<BoardVO> boardList = boardService.getListWithUser(userid, cri);
 		int total = boardService.getCntWithUser(userid);
-		model.addAttribute("total", total);
 		model.addAttribute("boardList",boardList);
 		model.addAttribute("pageMaker",new PageDTO(cri, total));
 		return "member/mypage";
+	}
+	@PreAuthorize("hasAnyRole('ROLE_USER,ROLE_ADMIN')")
+	@GetMapping("/mypage/like")
+	public String mypageLike(Criteria cri,Model model,Principal principal) {
+		String userid = principal.getName();
+		List<BoardVO> boardList = boardService.getListWithLike(userid, cri);
+		int total = boardService.getCntWithLike(userid);
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("pageMaker",new PageDTO(cri, total));
+		return "member/mypageLike";
 	}
 }

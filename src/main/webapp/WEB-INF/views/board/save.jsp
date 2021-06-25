@@ -86,6 +86,7 @@
 		</div>
 		<br/><br/><br/><br/><br/>
 
+<script src="/resources/js/summernote.js"></script>
 <%@include file = "../includes/footer.jsp" %>
 
         

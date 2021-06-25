@@ -16,9 +16,13 @@ public interface BoardMapper {
 	@Select("select count(*) from tbl_board where userid=#{userid}")
 	public int getCntWithUser(String userid);
 	
+	public int getCntWithLike(String userid);
+	
 	public List<BoardVO> getListWithPaging(Criteria cri);
 	
 	public List<BoardVO> getListWithUserPaging(@Param("userid")String userid,@Param("cri") Criteria cri);
+	
+	public List<BoardVO> getListWithLikePaging(@Param("userid")String userid,@Param("cri") Criteria cri);
 	
 	public void insert(BoardVO board);
 	
@@ -32,5 +36,6 @@ public interface BoardMapper {
 	
 	public void updateViewcnt(Long bno);
 	
+	public void updateLikecnt(Long bno);
 
 }

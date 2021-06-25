@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.huiy.mapper.LikeMapper">
+ 
+    <insert id="insert">
+    	<selectKey keyProperty="lno" order="AFTER" resultType="long">
+    		select seq_like.currval from dual
+    	</selectKey>
+   		insert into tbl_like (lno,bno,userid)
+ 		values(SEQ_LIKE.nextval,#{bno},#{userid})
+    </insert>
+    
+    	
+    <delete id="delete">
+ 		delete from tbl_like where lno = #{lno}	
+    </delete>
+    
+</mapper>

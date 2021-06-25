@@ -1,24 +1,7 @@
 
 var main = {
 	init : function() {
-		$.ajax({
-			url:'/api/air-info',
-			type:'get',
-			dataType:'json',
-			success: function(data){
-				var item = data.response.body.items;
-				if(item.length==0)
-					document.getElementById("dataTime").innerHTML = "아직 발표된 내용이 없습니다.";
-				else {
-					document.getElementById("dataTime").innerHTML = "( "+item[0].dataTime+" )";
-					document.getElementById("cause").innerHTML = "&#x1F4AC;"+_this.returnString(item[0].informCause);
-					document.getElementById("overall").innerHTML = "&#x1F4AC;"+_this.returnString(item[0].informOverall);
-				}
-			},
-			error: function(errorThrown) {
-				alert("Error: " + errorThrown);
-			}
-		});
+	
 		var _this = this;
 		$('#btn-save').on('click',function () {
 			_this.save();
@@ -41,12 +24,17 @@ var main = {
         	//actionForm 자체를 submit()
         	actionForm.submit();
         });
-	},
-	returnString : function(str) {
-		var len = str.length;
-		var index = str.indexOf("]", 0);
-		var str = str.substr(index+1,len+1);
-		return str;
+        var likeActionForm = $('#likeActionForm');
+        $('.paginate_button a').on('click',function(e) {
+        	//<a>태그를 클릭해도 페이지 이동이 없도록 처리 
+        	e.preventDefault();
+        	
+        	//form태그 내 pageNum값을 href 속성 값으로 변경 
+        	likeActionForm.find("input[name='pageNum']").val($(this).attr("href"));
+        	
+        	//actionForm 자체를 submit()
+        	likeActionForm.submit();
+        });
 	},
 	save : function () {
 		var data = {
@@ -128,57 +116,7 @@ var main = {
         });
     }
  };
- $(document).ready(function() {
-	  $('#summernote').summernote({
-		    placeholder: '상세 설명을 입력하세요',
-		    tabsize: 2,
-		    height: 500,
-		    toolbar: [
-		    	['fontname', ['fontname']],
-			    ['fontsize', ['fontsize']],
-			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-			    ['color', ['forecolor','color']],
-			    ['table', ['table']],
-			    ['para', ['ul', 'ol', 'paragraph']],
-			    ['height', ['height']],
-			    ['insert',['picture','link','video']],
-			    ['view', ['fullscreen', 'help']]
-		    ],
-		    fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-			callbacks: {	//여기 부분이 이미지를 첨부하는 부분
-				onImageUpload : function(files) {
-					uploadSummernoteImageFile(files[0],this);
-				},
-				onPaste: function (e) {
-					var clipboardData = e.originalEvent.clipboardData;
-					if (clipboardData && clipboardData.items && clipboardData.items.length) {
-						var item = clipboardData.items[0];
-						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-							e.preventDefault();
-						}
-					}
-				}
-			}
-	  });
-	});
 
-//이미지 파일 업로드
-function uploadSummernoteImageFile(file, editor) {	
-	data = new FormData();
-	data.append("file", file);
-	$.ajax({
-		data : data,
-		type : "POST",
-		url : "/api/board/image",
-		contentType : false,
-		enctype : 'multipart/form-data',
-		processData : false,
-		success : function(data) {
-			$(editor).summernote('editor.insertImage', data.url);
-		}
-	});
-}
  
  main.init();
 		

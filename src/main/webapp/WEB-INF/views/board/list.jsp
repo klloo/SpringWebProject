@@ -170,6 +170,7 @@
     </form>
 </div>
 
+<script src="/resources/js/airinfo.js"></script>
 <%@include file = "../includes/footer.jsp" %>
 
         

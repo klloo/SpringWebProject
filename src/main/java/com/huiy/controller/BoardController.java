@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.huiy.domain.BoardVO;
 import com.huiy.domain.Criteria;
+import com.huiy.domain.LikeVO;
 import com.huiy.domain.PageDTO;
 import com.huiy.service.BoardService;
 
@@ -40,9 +41,15 @@ public class BoardController {
 	}
 	
 	@GetMapping("/read")
-	public String read(@RequestParam("bno") Long bno, Model model) {
+	public String read(@RequestParam("bno") Long bno, Model model,Authentication authentication) {
 		BoardVO board = boardService.get(bno);
+		String heart = "false";
+		if(authentication!=null) {
+			String userid = authentication.getName();
+			heart = boardService.getHeart(userid, bno)+"";
+		}
 		model.addAttribute("board",board);
+		model.addAttribute("heart",heart);
 		return "board/read";
 	}
 	@PreAuthorize("hasAnyRole('ROLE_USER,ROLE_ADMIN')")

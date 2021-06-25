@@ -103,9 +103,14 @@
     <div class="content" > 
         ${board.content}
     </div>
-    <div class="likes" >
-    <img class="heart" type="button" src="/resources/images/heart_blank.png" height=25px/>
-    <span class="views">&nbsp;<c:out value="${board.likecnt}"/></span>
+    <div class="likes" > 
+	    <sec:authorize access="isAuthenticated()"> 
+	    	<sec:authentication property="principal.member.userid" var="userinfo"/>
+	    </sec:authorize>
+	    <input type="hidden" id="loginInfo" value="${userinfo}" readonly/>
+	    <input type="hidden" id="heartValue" value="${heart}" readonly/>
+		<img class="heart" id="heart" type="button" height=25px/>
+		<span class="views" id="views">&nbsp;<c:out value="${board.likecnt}"/></span>
     </div>  
 <br/><br/><br/>
 <br/><br/><br/>
@@ -115,5 +120,5 @@
 
 
 
-
+<script src="/resources/js/read.js"></script>
 <%@include file = "../includes/footer.jsp" %>

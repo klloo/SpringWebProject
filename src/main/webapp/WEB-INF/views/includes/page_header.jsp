@@ -4,7 +4,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <a class="site-heading" href="/board/list" style="text-decoration: none;">
-                            <h1>&#x1F42C; Blueberry &#x1F352;</h1>
+                            <h1>Board</h1>
                         </a>
                     </div>
                 </div>

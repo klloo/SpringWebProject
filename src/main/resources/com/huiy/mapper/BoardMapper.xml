@@ -31,6 +31,26 @@
  		]]> 
     </select>
     
+    <select id="getListWithLikePaging" resultType="com.huiy.domain.BoardVO">
+		<![CDATA[
+			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt
+			from (
+			 select /*+INDEX_DESC(tbl_board pk_board)*/
+			  rownum rn,tbl_board.bno,title,content,writer,regdate,updatedate,viewcnt,tbl_board.userid,isanonymous,likecnt
+			 from tbl_board,tbl_like
+			 where rownum <= #{cri.pageNum} * #{cri.amount}
+			 and tbl_board.bno = tbl_like.bno and tbl_like.userid=#{userid}
+			)
+			where rn > (#{cri.pageNum}-1) * #{cri.amount}
+ 		]]> 
+    </select>
+    <select id="getCntWithLike" resultType="int">
+    	<![CDATA[
+			select count(*)
+			from tbl_board,tbl_like
+			where tbl_board.bno = tbl_like.bno and tbl_like.userid = #{userid}
+ 		]]> 
+    </select>
     <insert id="insert">
  		insert into tbl_board (bno,title,content,writer,userid,isanonymous)
  		values(SEQ_BOARD.nextval,#{title},#{content},#{writer},#{userid},#{isanonymous})
@@ -70,4 +90,13 @@
     <delete id="delete">
  		delete from tbl_board where bno = #{bno}	
     </delete>
+    
+    <update id="updateLikecnt">
+    	update tbl_board
+    	set
+    	likecnt = (select count(*)
+    				from tbl_like
+    				where bno=#{bno})
+    	where bno=#{bno}
+    </update>
 </mapper>

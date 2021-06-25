@@ -127,8 +127,8 @@
     <br><br>
     <!-- 목록 출력 영역 -->
     <div style="margin-bottom:20px;">
-    <h5 style="display:inline-block;" type="button" onClick="location.href='/member/mypage'">작성한 글</h5> 
-    <h5 style="display:inline-block; color:grey" type="button" onClick="location.href='/member/mypage/like'">&nbsp;&nbsp;좋아요한 글</h5>
+    <h5 style="display:inline-block;color:grey" type="button" onClick="location.href='/member/mypage'">작성한 글</h5> 
+    <h5 style="display:inline-block;" type="button" onClick="location.href='/member/mypage/like'">&nbsp;&nbsp;좋아요한 글</h5>
     </div>
    
       <div class="table-responsive">
@@ -193,7 +193,7 @@
 		    </c:if>
     	</ul>
     </div>
-    <form id='actionForm' modelAttribute="cri" action="/member/mypage" method='get'>
+    <form id='actionForm' modelAttribute="cri" action="/member/mypage/like" method='get'>
     	<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
     	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
     </form>

@@ -15,7 +15,10 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration({
+	"file:src/main/webapp/WEB-INF/spring/root-context.xml",
+	"file:src/main/webapp/WEB-INF/spring/security-context.xml"
+})
 @Log4j
 public class BoardMapperTests {
 	
@@ -77,5 +80,21 @@ public class BoardMapperTests {
 		List<BoardVO> list = mapper.getListWithPaging(cri);
 		log.info("paging : ");
 		list.forEach(board->log.info(board.getBno()));
+	}
+	@Test
+	public void testPagingWithLike() {
+		Criteria cri = new Criteria();
+		cri.setPageNum(1);
+		cri.setAmount(10);
+		
+		List<BoardVO> list = mapper.getListWithLikePaging("as", cri);
+		log.info("paging : ");
+		list.forEach(board->log.info(board.getBno()));
+	}
+	
+	@Test
+	public void testUpdateLike() {
+		mapper.updateLikecnt(501L);
+		log.info("update like : " + mapper.read(501L));
 	}
 }
