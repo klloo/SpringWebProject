@@ -17,7 +17,9 @@ import com.huiy.domain.BoardVO;
 import com.huiy.domain.Criteria;
 import com.huiy.domain.LikeVO;
 import com.huiy.domain.PageDTO;
+import com.huiy.domain.ReplyVO;
 import com.huiy.service.BoardService;
+import com.huiy.service.ReplyService;
 
 import lombok.Setter;
 
@@ -27,6 +29,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private ReplyService replyService;
 	
 	@GetMapping("/list")
 	public String list(Criteria cri, Model model) {
@@ -48,8 +53,10 @@ public class BoardController {
 			String userid = authentication.getName();
 			heart = boardService.getHeart(userid, bno)+"";
 		}
+		List<ReplyVO> replyList = replyService.getListWithBoard(bno);
 		model.addAttribute("board",board);
 		model.addAttribute("heart",heart);
+		model.addAttribute("replyList", replyList);
 		return "board/read";
 	}
 	@PreAuthorize("hasAnyRole('ROLE_USER,ROLE_ADMIN')")

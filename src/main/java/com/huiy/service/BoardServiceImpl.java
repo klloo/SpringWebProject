@@ -99,4 +99,14 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.getCntWithLike(userid);
 	}
 
+	@Override
+	public List<BoardVO> getListWithReply(String userid, Criteria cri) {
+		return boardMapper.getListWithReplyPaging(userid, cri);
+	}
+
+	@Override
+	public int getCntWithReply(String userid) {
+		return boardMapper.getCntWithReply(userid);
+	}
+
 }

@@ -5,6 +5,8 @@
 <%@include file = "../includes/top_menu.jsp" %>
 <%@include file = "../includes/page_header.jsp" %>
 <link rel="stylesheet" href="/resources/css_table/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/util.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
 <style>
         *{
             border-collapse: collapse;
@@ -65,6 +67,13 @@
             padding-bottom: 25%;
         }
         .id_info{ display: none;}
+         .checks input[type="checkbox"]:checked + label:before { 
+		/* 체크박스를 체크했을때 */
+		 content: '\2714';
+		  /* 체크표시 유니코드 사용 */ 
+		  color: #99a1a7; 
+		}
+        
      </style>
 <br/><br/><br/>
 <input type="text" class="id_info" id="id" value="${board.bno}" readonly>
@@ -110,8 +119,67 @@
 	    <input type="hidden" id="loginInfo" value="${userinfo}" readonly/>
 	    <input type="hidden" id="heartValue" value="${heart}" readonly/>
 		<img class="heart" id="heart" type="button" height=25px/>
-		<span class="views" id="views">&nbsp;<c:out value="${board.likecnt}"/></span>
-    </div>  
+		<span class="views" id="views">&nbsp;<c:out value="${board.likecnt}"/>&nbsp;&nbsp;&nbsp;</span>
+		<img src="/resources/images/speech_bubble2.png" height=22px/>
+		<span class="views" id="replies">&nbsp;<c:out value="${board.replycnt}"/>&nbsp;&nbsp;&nbsp;</span>
+    </div>
+    <br/> <br/>
+    <sec:authorize access="isAuthenticated()"> 
+    	<div class="container">
+			<form>
+	        	<div class="wrap-input100 validate-input m-b-26">
+	          		<span class="label-input100" id="replyer">
+			            <sec:authentication property="principal.member.userName"/>
+	          		</span>
+	            	<input type="text" class="input100" id="reply" placeholder="댓글 내용 입력">
+	        	</div>
+	        </form>
+	        <div class="checks" style="display:inline-block;">
+				<input class="input-checkbox100" id="ckb1" type="checkbox" name="isAnonymousReply">
+				<label class="label-checkbox100" for="ckb1" style="display:inline-block;">익명</label>
+			</div>
+           	<span type="button" class="write_btn" id="btn-reply-save" style="display:inline-block; float:right;">WRITE</span>
+        
+		</div>
+	</sec:authorize>
+      <br/> <br/>
+      <c:forEach var="reply" items="${replyList}">
+	      <div class="replies m-b-20" style="background-color:rgb(248, 248, 248); border-radius:10px;">
+	      	<input type="hidden" id="rno" value="${reply.rno}" readonly>
+	          <div class="container" style="padding:10px;">
+		          <span>
+			          	<c:choose>
+			          		<c:when test="${reply.userid eq board.userid}">글쓴이</c:when>
+			                 <c:when test="${reply.isanonymous eq 'true'}">익명</c:when>
+							 <c:when test="${reply.isanonymous eq 'false'}"><c:out value="${reply.replyer}"/></c:when>
+						</c:choose>
+		            </span>
+		            <sec:authorize access="isAuthenticated()"> 
+			            <sec:authentication property="principal" var="pinfo"/>
+	        			<c:if test="${pinfo.username eq reply.userid}">
+	        			
+			            	<div id="btn-reply-del" style="float:right; font-size: 90%; cursor:pointer; color:grey" onClick='deleteReply("${reply.rno}")'>
+			             		삭제
+			                	&nbsp;&nbsp;&nbsp;
+			            	</div>
+			            </c:if>
+			           </sec:authorize>
+			          
+		            
+		            <div class="date"  style="float:right;">
+		                 <fmt:formatDate pattern="yyyy. MM. dd HH:mm" value="${reply.replyDate}"/>
+		            	<span>&nbsp;&nbsp;&nbsp;</span>
+		            </div>
+		            
+					<hr/>
+		            <div>
+		            	<c:out value="${reply.reply}"/> 
+		            </div>
+	          </div>
+	      </div>
+      </c:forEach>
+      
+      
 <br/><br/><br/>
 <br/><br/><br/>
 <br/><br/><br/>
@@ -120,5 +188,6 @@
 
 
 
-<script src="/resources/js/read.js"></script>
+<script src="/resources/js/like.js"></script>
+<script src="/resources/js/reply.js"></script>
 <%@include file = "../includes/footer.jsp" %>

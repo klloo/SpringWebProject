@@ -48,7 +48,18 @@ var main = {
 			userpw: sha256($('#password').val()),
 			userName: $('#name').val()
 		};
-		
+		if( $('#id').val().length == 0){
+			alert('아이디를 입력해주세요.');
+			return;
+		}
+		if($('#password').val().length == 0){
+			alert('비밀번호를 입력해주세요.');
+			return;
+		}
+		if($('#name').val().length == 0){
+			alert('이름을 입력해주세요.');
+			return;
+		}
 		var isCheckId = $('#isCheckID').val();
 		if(isCheckId == '0') {
 			alert("아이디 중복체크를 해주세요");

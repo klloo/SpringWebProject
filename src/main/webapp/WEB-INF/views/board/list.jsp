@@ -121,7 +121,10 @@
         		<tr>
 					<td> <c:out value="${no}"/> </td>
 					<c:set var="no" value="${no+1}"/>
-					<td> <a href="/board/read?bno=${board.bno}"/><c:out value="${board.title}"/></td>
+					<td> <a href="/board/read?bno=${board.bno}"/>
+						<c:if test="${board.replycnt == '0'}"><c:out value="${board.title}"/></c:if>
+						<c:if test="${board.replycnt != '0'}"><c:out value="${board.title} [${board.replycnt}]"/></c:if>
+					</td>
 					<td> 
 						<c:if test="${board.isanonymous eq 'true'}">익명</c:if>
 						<c:if test="${board.isanonymous eq 'false'}"><c:out value="${board.writer}"/></c:if>

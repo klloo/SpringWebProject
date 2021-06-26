@@ -6,10 +6,10 @@
 <mapper namespace="com.huiy.mapper.BoardMapper">
 	<select id="getListWithPaging" resultType="com.huiy.domain.BoardVO">
  		<![CDATA[
-			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt
+			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt,replycnt
 			from (
 			 select /*+INDEX_DESC(tbl_board pk_board)*/
-			  rownum rn,bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt
+			  rownum rn,bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt,replycnt
 			 from tbl_board
 			 where rownum <= #{pageNum} * #{amount}
 			)
@@ -19,10 +19,10 @@
     
     <select id="getListWithUserPaging" resultType="com.huiy.domain.BoardVO">
 		<![CDATA[
-			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt
+			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt,replycnt
 			from (
 			 select /*+INDEX_DESC(tbl_board pk_board)*/
-			  rownum rn,bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt
+			  rownum rn,bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt,replycnt
 			 from tbl_board
 			 where rownum <= #{cri.pageNum} * #{cri.amount}
 			 and userid=#{userid}
@@ -33,13 +33,27 @@
     
     <select id="getListWithLikePaging" resultType="com.huiy.domain.BoardVO">
 		<![CDATA[
-			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt
+			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt,replycnt
 			from (
 			 select /*+INDEX_DESC(tbl_board pk_board)*/
-			  rownum rn,tbl_board.bno,title,content,writer,regdate,updatedate,viewcnt,tbl_board.userid,isanonymous,likecnt
+			  rownum rn,tbl_board.bno,title,content,writer,regdate,updatedate,viewcnt,tbl_board.userid,isanonymous,likecnt,replycnt
 			 from tbl_board,tbl_like
 			 where rownum <= #{cri.pageNum} * #{cri.amount}
 			 and tbl_board.bno = tbl_like.bno and tbl_like.userid=#{userid}
+			)
+			where rn > (#{cri.pageNum}-1) * #{cri.amount}
+ 		]]> 
+    </select>
+    
+    <select id="getListWithReplyPaging" resultType="com.huiy.domain.BoardVO">
+		<![CDATA[
+			select bno,title,content,writer,regdate,updatedate,viewcnt,isanonymous,likecnt,replycnt
+			from (
+			 select /*+INDEX_DESC(tbl_board pk_board)*/
+			  rownum rn,tbl_board.bno,title,content,writer,regdate,tbl_board.updatedate,viewcnt,tbl_board.userid,tbl_board.isanonymous,likecnt,replycnt
+			 from tbl_board,tbl_reply
+			 where rownum <= #{cri.pageNum} * #{cri.amount}
+			 and tbl_board.bno = tbl_reply.bno and tbl_reply.userid=#{userid}
 			)
 			where rn > (#{cri.pageNum}-1) * #{cri.amount}
  		]]> 
@@ -49,6 +63,13 @@
 			select count(*)
 			from tbl_board,tbl_like
 			where tbl_board.bno = tbl_like.bno and tbl_like.userid = #{userid}
+ 		]]> 
+    </select>
+    <select id="getCntWithReply" resultType="int">
+    	<![CDATA[
+			select count(*)
+			from tbl_board,tbl_reply
+			where tbl_board.bno = tbl_reply.bno and tbl_reply.userid = #{userid}
  		]]> 
     </select>
     <insert id="insert">
@@ -96,6 +117,15 @@
     	set
     	likecnt = (select count(*)
     				from tbl_like
+    				where bno=#{bno})
+    	where bno=#{bno}
+    </update>
+    
+    <update id="updateReplycnt">
+    	update tbl_board
+    	set
+    	replycnt = (select count(*)
+    				from tbl_reply
     				where bno=#{bno})
     	where bno=#{bno}
     </update>

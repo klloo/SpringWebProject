@@ -129,6 +129,7 @@
     <div style="margin-bottom:20px;">
     <h5 style="display:inline-block;color:grey" type="button" onClick="location.href='/member/mypage'">작성한 글</h5> 
     <h5 style="display:inline-block;" type="button" onClick="location.href='/member/mypage/like'">&nbsp;&nbsp;좋아요한 글</h5>
+    <h5 style="display:inline-block;color:grey" type="button" onClick="location.href='/member/mypage/reply'">&nbsp;&nbsp;댓글단 글</h5> 
     </div>
    
       <div class="table-responsive">

@@ -18,11 +18,15 @@ public interface BoardMapper {
 	
 	public int getCntWithLike(String userid);
 	
+	public int getCntWithReply(String userid);
+	
 	public List<BoardVO> getListWithPaging(Criteria cri);
 	
 	public List<BoardVO> getListWithUserPaging(@Param("userid")String userid,@Param("cri") Criteria cri);
 	
 	public List<BoardVO> getListWithLikePaging(@Param("userid")String userid,@Param("cri") Criteria cri);
+	
+	public List<BoardVO> getListWithReplyPaging(@Param("userid")String userid,@Param("cri") Criteria cri);
 	
 	public void insert(BoardVO board);
 	
@@ -37,5 +41,7 @@ public interface BoardMapper {
 	public void updateViewcnt(Long bno);
 	
 	public void updateLikecnt(Long bno);
+	
+	public void updateReplycnt(Long bno);
 
 }

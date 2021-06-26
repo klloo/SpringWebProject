@@ -33,7 +33,7 @@ var main = {
 			dataType: 'text',
         }).done(function(data) {
             $("#heart").prop("src", "/resources/images/heart.png");
-			document.getElementById("views").innerHTML = " "+data;
+			document.getElementById("views").innerHTML = "&nbsp;"+data+"&nbsp;&nbsp;&nbsp;";
 			$('#heartValue').val("true");
         }).fail(function (error) {
             alert('좋아요를 누르지 못하였습니다.');
@@ -47,7 +47,7 @@ var main = {
 			dataType: 'text',
         }).done(function(data) {
             $("#heart").prop("src", "/resources/images/heart_blank.png");
-			document.getElementById("views").innerHTML = " "+data;
+			document.getElementById("views").innerHTML = "&nbsp;"+data+"&nbsp;&nbsp;&nbsp;";
 			$('#heartValue').val("false");
         }).fail(function (error) {
             alert('좋아요를 취소하지 못하였습니다.');

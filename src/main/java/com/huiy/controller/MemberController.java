@@ -63,6 +63,16 @@ public class MemberController {
 		int total = boardService.getCntWithLike(userid);
 		model.addAttribute("boardList",boardList);
 		model.addAttribute("pageMaker",new PageDTO(cri, total));
-		return "member/mypageLike";
+		return "member/mypage-like";
+	}
+	@PreAuthorize("hasAnyRole('ROLE_USER,ROLE_ADMIN')")
+	@GetMapping("/mypage/reply")
+	public String mypageReply(Criteria cri,Model model,Principal principal) {
+		String userid = principal.getName();
+		List<BoardVO> boardList = boardService.getListWithReply(userid, cri);
+		int total = boardService.getCntWithReply(userid);
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("pageMaker",new PageDTO(cri, total));
+		return "member/mypage-reply";
 	}
 }

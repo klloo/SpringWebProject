@@ -17,6 +17,8 @@ public interface BoardService {
 	
 	public List<BoardVO> getListWithLike(String userid,Criteria cri);
 	
+	public List<BoardVO> getListWithReply(String userid,Criteria cri);
+	
 	public void register(BoardVO board);
 	
 	public BoardVO get(Long bno);
@@ -32,5 +34,7 @@ public interface BoardService {
 	boolean getHeart(String userid, Long bno);
 
 	public int getCntWithLike(String userid);
+	
+	public int getCntWithReply(String userid);
 
 }
