@@ -24,7 +24,7 @@
 
 ![스크린샷_2021-06-15_오후_9 55 53](https://user-images.githubusercontent.com/53117014/147853712-d0e464bc-236b-478a-9786-39a631cdad92.png)
 
-<img width="90%" src="https://user-images.githubusercontent.com/53117014/147853721-b4f47c0d-a1fb-4805-acd5-5b4cb707f957.png">
+<img width="85%" src="https://user-images.githubusercontent.com/53117014/147853721-b4f47c0d-a1fb-4805-acd5-5b4cb707f957.png">
 
 ![스크린샷_2021-06-29_오후_11 30 22](https://user-images.githubusercontent.com/53117014/147853722-15ef9586-a0f1-43a1-a6e2-cb336e3e79c6.png)
 
