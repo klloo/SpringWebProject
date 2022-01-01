@@ -20,9 +20,11 @@
 <br>
 <br>
 
+**화면 캡쳐**
+
 ![스크린샷_2021-06-29_오후_11 39 20](https://user-images.githubusercontent.com/53117014/147853710-e5bba58f-9be7-4169-b50a-fd31b314bf58.png)
 
-![스크린샷_2021-06-15_오후_9 55 53](https://user-images.githubusercontent.com/53117014/147853712-d0e464bc-236b-478a-9786-39a631cdad92.png)
+![image](https://user-images.githubusercontent.com/53117014/147853830-6a72572b-0a86-408d-9cee-61c48ca7745d.png)
 
 <img width="85%" src="https://user-images.githubusercontent.com/53117014/147853721-b4f47c0d-a1fb-4805-acd5-5b4cb707f957.png">
 
