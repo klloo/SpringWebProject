@@ -16,10 +16,11 @@
 - 게시물 작성에 SummerNote Editor 적용
 - 공공api를 사용한 미세먼지 현황 조회
 
-<img width="60%" src="https://user-images.githubusercontent.com/53117014/147853349-983f846f-233d-4c03-be32-22e5e0247eef.png">
-
 <img width="60%" src="https://user-images.githubusercontent.com/53117014/147853364-55d5631a-794a-41f8-92b6-f2fba6f33714.png">
 
 <img width="60%" src="https://user-images.githubusercontent.com/53117014/147853366-4107b2d5-be4a-4b4a-9946-c50acebb6af5.png">
 
 <img width="60%" src="https://user-images.githubusercontent.com/53117014/147853402-a724816d-983d-4497-8e2d-7bfd9fcd5750.png">
+
+<img width="60%" src="https://user-images.githubusercontent.com/53117014/147853349-983f846f-233d-4c03-be32-22e5e0247eef.png">
+
